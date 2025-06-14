@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pizzeria-bot-deployment
+  namespace: bot-la-bella-italia
 spec:
   replicas: 1
   selector:
