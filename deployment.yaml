@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pizzeria-bot-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pizzeria-bot
+  template:
+    metadata:
+      labels:
+        app: pizzeria-bot
+    spec:
+      containers:
+        - name: pizzeria-bot-container
+          # Reemplaza esto con la ruta a tu imagen en Docker Hub
+          image: dmarmijosa/pizzeria-bot:1.0
+          env:
+            # Inyecta el token de Telegram desde el Secret
+            - name: TELEGRAM_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  # El nombre del Secret que creamos antes
+                  name: pizzeria-bot-secret
+                  # La clave dentro del Secret que contiene el token
+                  key: telegram-token

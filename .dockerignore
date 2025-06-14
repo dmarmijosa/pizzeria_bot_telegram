@@ -1,0 +1,13 @@
+# Archivo .dockerignore
+
+# Entorno virtual
+env/
+venv/
+*.venv
+
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+
+# Archivo de variables locales (no debe ir en la imagen)
+.env
