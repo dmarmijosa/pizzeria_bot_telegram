@@ -9,6 +9,13 @@
     "idioma": "Language",
     "novedad": "New"
   },
+  "general": {
+    "greeting": "Hello",
+    "language_name": "English",
+    "unknown_command": "Sorry, I didn't understand that message. Please use the available commands like /menu or the buttons provided.",
+    "welcome_line1": "You can see our {menu} with /menu or our {contact} with /contacto.",
+    "welcome_line2": "To change the language, use /idioma."
+  },
   "hero": {
     "titulo": "Enjoy an original delicious pizza"
   },

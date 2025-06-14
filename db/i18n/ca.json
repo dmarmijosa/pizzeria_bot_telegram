@@ -9,6 +9,21 @@
     "idioma": "Idioma",
     "novedad": "Novetat"
   },
+  "general": {
+    "greeting": "Hola",
+    "language_name": "Català",
+    "unknown_command": "Ho sento, no he entès aquest missatge. Si us plau, utilitza les comandes disponibles com /menu o els botons que t'ofereixo.",
+    "welcome_line1": "Pots veure el nostre {menu} amb /menu o el nostre {contacto} amb /contacto.",
+    "welcome_line2": "Per canviar l'idioma, fes servir /idioma."
+  },
+  "menu": {
+    "nuestrasPizzas": "Les Nostres Pizzes",
+    "pizzasEspeciales": "Pizzes Especials",
+    "tapas": "Tapes",
+    "postresCaseros": "Postres Casolanes",
+    "bebidas": "Begudes",
+    "vinos": "Vins"
+  },
   "hero": {
     "titulo": "Gaudeix d'una deliciosa pizza original"
   },
@@ -194,18 +209,6 @@
     "pinot": "Pinot",
     "merlot": "Merlot",
     "copa-vino": "Copa de vi (de la casa)"
-  },
-  "menu": {
-    "nuestras": "Les nostres",
-    "pizzas": "Pizzes",
-    "especiales": "Especials",
-    "nuestros": "Els nostres",
-    "tapas": "Tapes",
-    "postres": "Postres",
-    "bebidas": "Begudes",
-    "vinos": "Vins",
-    "ingredientes-single": "Ingredients extres ",
-    "ingredientes": "Ingredients extres (Peix/Carn/Formatge)"
   },
   "contacto": {
     "contacto": "Contacte",

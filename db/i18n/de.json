@@ -9,6 +9,21 @@
     "idioma": "Sprache",
     "novedad": "Neuheit"
   },
+  "general": {
+    "greeting": "Hallo",
+    "language_name": "Deutsch",
+    "unknown_command": "Entschuldigung, ich habe diese Nachricht nicht verstanden. Bitte verwenden Sie die verfügbaren Befehle wie /menu oder die angebotenen Schaltflächen.",
+    "welcome_line1": "Sie können unser {menu} mit /menu oder unseren {kontakt} mit /contacto einsehen.",
+    "welcome_line2": "Um die Sprache zu ändern, verwenden Sie /idioma."
+  },
+  "menu": {
+    "nuestrasPizzas": "Unsere Pizzen",
+    "pizzasEspeciales": "Spezialpizzen",
+    "tapas": "Tapas",
+    "postresCaseros": "Hausgemachte Desserts",
+    "bebidas": "Getränke",
+    "vinos": "Weine"
+  },
   "hero": {
     "titulo": "Genieße eine köstliche Original-Pizza"
   },
@@ -194,19 +209,7 @@
     "merlot": "Merlot",
     "copa-vino": "Weinglas (Hauswein)"
   },
-  "menu": {
-    "nuestras": "Unsere",
-    "pizzas": "Pizzas",
-    "especiales": "Spezialitäten",
-    "nuestros": "Unsere",
-    "tapas": "Tapas",
-    "postres": "Desserts",
-    "bebidas": "Getränke",
-    "vinos": "Weine",
-    "ingredientes-single": "Zusätzliche Zutaten",
-    "ingredientes": "Zusätzliche Zutaten (Fisch/Fleisch/Käse)",
-    "ensalda-caprese": "Caprese Salat"
-  },
+
   "contacto": {
     "contacto": "Kontakt",
     "ubicacion": "Standort",

@@ -1,5 +1,5 @@
 {
-  "menuPrincipal": [
+  "nuestrasPizzas": [
     {
       "nombre": "nuestras-pizzas.margarita",
       "ingredientes": ["ingredientes.tomate", "ingredientes.mozarella"],
@@ -549,7 +549,7 @@
       "promocion": false
     }
   ],
-  "postres": [
+  "postresCaseros": [
     {
       "nombre": "postres-caseros.tiramisu",
       "precio": "3,50€",
@@ -623,7 +623,7 @@
       "promocion": false
     }
   ],
-  "vino": [
+  "vinos": [
     {
       "nombre": "vino.pinot",
       "precio": "10,00€",

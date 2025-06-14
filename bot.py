@@ -1,204 +1,195 @@
+import os
 import json
 import logging
+from glob import glob
+from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    ContextTypes,
+    CallbackQueryHandler,
+    MessageHandler,
+    filters,
+)
 
-# Configura el logging para ver errores (opcional pero útil)
+# --- Cargar variables de entorno del archivo .env ---
+load_dotenv()
+
+# --- Configuración de Logging ---
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
-# --- Carga de Datos del JSON ---
-# Asegúrate de que 'db.json' está en la misma carpeta que este script
+# --- Carga de datos y traducciones ---
 try:
-    with open('db.json', 'r', encoding='utf-8') as f:
-        datos_pizzeria = json.load(f)
-    datos_la_bella_italia = datos_pizzeria.get('laBellaItalia', {})
-    datos_menu_solopizza = datos_pizzeria.get('solopizza', {})
-    if not datos_la_bella_italia and not datos_menu_solopizza:
-        logger.error("El archivo db.json parece estar vacío o no contiene las claves 'laBellaItalia' o 'solopizza'.")
-        exit()
-except FileNotFoundError:
-    logger.error("Error: No se encontró el archivo db.json. Asegúrate de que está en el mismo directorio que bot.py.")
+    with open('db/menu-principal.json', 'r', encoding='utf-8') as f:
+        menu_data = json.load(f)
+    translation_files = glob('db/i18n/[a-z][a-z].json')
+    translations = {}
+    for file_path in translation_files:
+        lang_code = os.path.splitext(os.path.basename(file_path))[0]
+        with open(file_path, 'r', encoding='utf-8') as f:
+            translations[lang_code] = json.load(f)
+    SUPPORTED_LANGUAGES = list(translations.keys())
+    DEFAULT_LANGUAGE = 'es' if 'es' in SUPPORTED_LANGUAGES else SUPPORTED_LANGUAGES[0]
+    logger.info(f"Idiomas cargados: {SUPPORTED_LANGUAGES}")
+except FileNotFoundError as e:
+    logger.error(f"Error: No se encontró el archivo JSON: {e}")
     exit()
-except json.JSONDecodeError:
-    logger.error("Error: El archivo db.json no tiene un formato JSON válido.")
+except json.JSONDecodeError as e:
+    logger.error(f"Error: El archivo JSON no tiene un formato válido: {e}")
     exit()
 
-# --- Token del Bot ---
-# ¡¡¡REEMPLAZA ESTO CON EL TOKEN QUE TE DIO BOTFATHER!!!
-TELEGRAM_TOKEN = '7131382416:AAH7rvtF3NRMFqD4zqsBBtE0FbweKoIgubs'
+# --- Gestión del Token ---
+TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 
-# --- Funciones para Formatear Respuestas ---
-
-def formatear_promociones_html():
-    promociones = datos_la_bella_italia.get('promociones', [])
-    if not promociones:
-        return "Actualmente no tenemos promociones especiales. ¡Vuelve pronto!"
-    
-    respuesta = "<b>📢 PROMOCIONES ESPECIALES 📢</b>\n\n"
-    for promo in promociones:
-        respuesta += f"<b>🔹 {promo.get('nombre', 'Promoción')}</b>\n"
-        respuesta += f"   <i>{promo.get('descripcion', '')}</i>\n"
-        if promo.get('precio') and promo.get('precio') != "No especificado directamente, se infiere de la oferta de Miércoles": # Evitar este texto específico
-            respuesta += f"   <b>Precio:</b> {promo.get('precio')}\n"
-        respuesta += "\n"
-    return respuesta
-
-def formatear_horario_html():
-    horario_str = datos_la_bella_italia.get('horario', '')
-    if not horario_str:
-        return "No hemos podido encontrar la información del horario."
-    return f"<b>🕒 NUESTRO HORARIO 🕒</b>\n\n{horario_str}"
-
-def formatear_contacto_html():
-    contactos_list = datos_la_bella_italia.get('contacto', [])
-    if not contactos_list:
-        return "No podemos mostrar la información de contacto en este momento."
-    respuesta = "<b>📞 CONTACTO 📞</b>\n\n"
-    for contacto in contactos_list:
-        respuesta += f"▫️ Tel: {contacto}\n"
-    return respuesta
-
-def formatear_info_adicional_html():
-    info_list = datos_la_bella_italia.get('informacion_adicional', [])
-    if not info_list:
-        return "" # No es crítico si no hay
-    respuesta = "<b>ℹ️ INFORMACIÓN ADICIONAL ℹ️</b>\n\n"
-    for info in info_list:
-        respuesta += f"▪️ {info}\n"
-    return respuesta
-
-def obtener_categorias_menu():
-    categorias_data = datos_menu_solopizza.get('categorias', [])
-    if not categorias_data:
-        return "El menú no está disponible en este momento.", None
-
-    keyboard = []
-    for i, categoria in enumerate(categorias_data):
-        # callback_data es lo que se envía cuando se presiona el botón
-        keyboard.append([InlineKeyboardButton(categoria['nombre'], callback_data=f"cat_{i}")])
-    
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    return "<b>🍕 MENÚ - ELIGE UNA CATEGORÍA 🍕</b>", reply_markup
-
-def obtener_productos_de_categoria_html(indice_categoria_str):
+# --- Funciones de utilidad ---
+def _(key: str, lang_code: str):
+    lang_code = lang_code if lang_code in SUPPORTED_LANGUAGES else DEFAULT_LANGUAGE
+    keys = key.split('.')
+    value = translations.get(lang_code)
     try:
-        indice_categoria = int(indice_categoria_str)
-        categoria = datos_menu_solopizza['categorias'][indice_categoria]
-        nombre_categoria = categoria['nombre']
-        productos = categoria.get('productos', [])
+        for k in keys:
+            value = value[k]
+        return value
+    except (KeyError, TypeError):
+        logger.warning(f"Clave de traducción no encontrada para '{lang_code}': {key}")
+        return key
 
-        if not productos:
-            return f"No hay productos en la categoría: <b>{nombre_categoria}</b>", None
+def get_user_lang(context: ContextTypes.DEFAULT_TYPE) -> str:
+    return context.user_data.get('language', DEFAULT_LANGUAGE)
 
-        respuesta = f"📜 <b>{nombre_categoria.upper()}</b> 📜\n\n"
-        for prod in productos:
-            respuesta += f"🔸 <b>{prod.get('nombre', 'Producto')}</b>"
-            if prod.get('precio'):
-                respuesta += f" - {prod.get('precio')}"
-            respuesta += "\n"
-            if prod.get('ingredientes') and isinstance(prod['ingredientes'], list) and len(prod['ingredientes']) > 0:
-                ing_str = ", ".join(prod['ingredientes'])
-                respuesta += f"   <i>Ingredientes: {ing_str}</i>\n"
-            respuesta += "\n"
-        
-        # Botón para volver a las categorías
-        keyboard = [[InlineKeyboardButton("⬅️ Volver a Categorías", callback_data="menu_principal")]]
-        reply_markup = InlineKeyboardMarkup(keyboard)
-        return respuesta, reply_markup
-
-    except (ValueError, IndexError, KeyError) as e:
-        logger.error(f"Error al procesar categoría '{indice_categoria_str}': {e}")
-        return "Error al mostrar los productos de esta categoría. Intenta de nuevo.", None
-
-# --- Comandos del Bot (Handlers) ---
+# --- Comandos del Bot ---
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Envía un mensaje de bienvenida cuando se usa /start."""
+    user_lang = get_user_lang(context)
     user = update.effective_user
-    mensaje_bienvenida = (
-        f"¡Hola {user.mention_html()}! 👋\n"
-        "Soy el bot de la <b>Pizzería La Bella Italia Menorca</b>.\n\n"
-        "Aquí tienes los comandos disponibles:\n"
-        "  /menu - 🍕 Ver nuestro delicioso menú\n"
-        "  /promociones - 📢 Ver promociones\n"
-        "  /horario - 🕒 Consultar horario\n"
-        "  /contacto - 📞 Información de contacto\n"
-        "  /info - ℹ️ Más sobre nosotros\n\n"
-        "¡Buen provecho!"
+    
+    menu_text = f"<b>{_('navegacion.menu', user_lang)}</b>"
+    contact_text = f"<b>{_('navegacion.contacto', user_lang)}</b>"
+    
+    # --- LA CORRECCIÓN FINAL ESTÁ AQUÍ ---
+    # La clave en el JSON es {contacto} (con 'o'), por lo que el código debe usar contacto=...
+    # para que coincida.
+    line1 = _('general.welcome_line1', user_lang).format(menu=menu_text, contacto=contact_text)
+    line2 = _('general.welcome_line2', user_lang)
+
+    welcome_message = (
+        f"{_('general.greeting', user_lang)} {user.mention_html()}! 👋\n"
+        f"<b>{_('pizzeria', user_lang)} La Bella Italia Menorca</b>\n\n"
+        f"{line1}\n\n"
+        f"{line2}"
     )
-    await update.message.reply_html(mensaje_bienvenida)
+    
+    if update.message:
+        await update.message.reply_html(welcome_message)
+    elif update.callback_query:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=welcome_message,
+            parse_mode='HTML'
+        )
 
 async def menu_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Muestra las categorías del menú como botones inline."""
-    texto, reply_markup = obtener_categorias_menu()
-    await update.message.reply_html(texto, reply_markup=reply_markup)
-
-async def promociones_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Muestra las promociones."""
-    respuesta = formatear_promociones_html()
-    await update.message.reply_html(respuesta)
-
-async def horario_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Muestra el horario."""
-    respuesta = formatear_horario_html()
-    await update.message.reply_html(respuesta)
+    user_lang = get_user_lang(context)
+    keyboard = []
+    for category_key in menu_data.keys():
+        translated_name = _(f"menu.{category_key}", user_lang)
+        keyboard.append([InlineKeyboardButton(translated_name, callback_data=f"show_category_{category_key}")])
+    title = f"<b>{_('navegacion.menu', user_lang).upper()}</b>"
+    await update.message.reply_html(title, reply_markup=InlineKeyboardMarkup(keyboard))
 
 async def contacto_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Muestra la información de contacto."""
-    respuesta = formatear_contacto_html()
-    await update.message.reply_html(respuesta)
+    user_lang = get_user_lang(context)
+    info = (
+        f"<b>📍 {_('contacto.ubicacion', user_lang)}</b>\n"
+        f"{_('contacto.direccion', user_lang)}, {_('contacto.pueblo', user_lang)}\n\n"
+        f"<b>🕒 {_('contacto.horario', user_lang)}</b>\n"
+        f"{_('contacto.horario-abierto', user_lang)}\n"
+        f"{_('contacto.horarioVerano', user_lang)}\n"
+        f"{_('contacto.hora-cierre', user_lang)}\n\n"
+        f"<b>📞 {_('contacto.telefonos-de-contacto', user_lang)}</b>\n"
+        f"871 020 595 / 685 177 889"
+    )
+    await update.message.reply_html(info)
+    
+    await context.bot.send_location(
+        chat_id=update.effective_chat.id,
+        latitude=40.00192,
+        longitude=3.84088
+    )
 
-async def info_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Muestra información adicional."""
-    respuesta = formatear_info_adicional_html()
-    await update.message.reply_html(respuesta)
+async def language_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    keyboard = []
+    for lang_code in SUPPORTED_LANGUAGES:
+        lang_name = _('general.language_name', lang_code)
+        keyboard.append([InlineKeyboardButton(lang_name, callback_data=f'set_lang_{lang_code}')])
+    
+    await update.message.reply_text(f"{_('navegacion.idioma', get_user_lang(context))}:", reply_markup=InlineKeyboardMarkup(keyboard))
 
+async def handle_unknown_text(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    user_lang = get_user_lang(context)
+    response_text = _('general.unknown_command', user_lang)
+    await update.message.reply_text(response_text)
+
+# --- Callbacks para los botones ---
 async def button_callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Maneja las pulsaciones de los botones inline (callbacks)."""
     query = update.callback_query
-    await query.answer()  # Es importante responder al callback
+    await query.answer()
+    
+    data = query.data
 
-    data = query.data # Esto es lo que pusimos en callback_data
+    if data.startswith("set_lang_"):
+        lang_code = data.split('_')[2]
+        context.user_data['language'] = lang_code
+        confirmation_text = f"{_('navegacion.idioma', lang_code)}: {_('general.language_name', lang_code)}"
+        await query.edit_message_text(text=confirmation_text)
+        await start_command(update, context) 
+        return
 
-    if data == "menu_principal":
-        texto, reply_markup = obtener_categorias_menu()
-        await query.edit_message_text(text=texto, reply_markup=reply_markup, parse_mode='HTML')
-    elif data.startswith("cat_"):
-        indice_categoria_str = data.split("_")[1]
-        texto, reply_markup = obtener_productos_de_categoria_html(indice_categoria_str)
-        if texto:
-            await query.edit_message_text(text=texto, reply_markup=reply_markup, parse_mode='HTML')
-        else: # Si hay un error, al menos informa
-            await query.edit_message_text(text="Lo siento, no pude cargar esa categoría.", parse_mode='HTML')
+    user_lang = get_user_lang(context)
 
+    if data.startswith("show_category_"):
+        category_key = data.replace("show_category_", "")
+        items = menu_data.get(category_key, [])
+        category_name = _(f"menu.{category_key}", user_lang)
+        response = f"<b>--- {category_name.upper()} ---</b>\n\n"
+        for item in items:
+            item_name_key = item.get("nombre")
+            item_name = _(item_name_key, user_lang)
+            response += f"<b>{item_name}</b> - {item.get('precio', '')}\n"
+            if "ingredientes" in item:
+                ingredient_keys = item.get("ingredientes", [])
+                translated_ingredients = [_ (ing_key, user_lang) for ing_key in ingredient_keys]
+                response += f"<i>{', '.join(translated_ingredients)}</i>\n"
+            response += "\n"
+        
+        keyboard = [[InlineKeyboardButton(f"⬅️ {_('navegacion.menu', user_lang)}", callback_data="main_menu")]]
+        await query.edit_message_text(response, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode='HTML')
+
+    if data == "main_menu":
+        keyboard = []
+        for category_key in menu_data.keys():
+            translated_name = _(f"menu.{category_key}", user_lang)
+            keyboard.append([InlineKeyboardButton(translated_name, callback_data=f"show_category_{category_key}")])
+        title = f"<b>{_('navegacion.menu', user_lang).upper()}</b>"
+        await query.edit_message_text(title, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode='HTML')
 
 # --- Función Principal ---
 def main() -> None:
-    """Inicia el bot."""
-    if TELEGRAM_TOKEN == 'TU_TOKEN_DE_TELEGRAM_AQUI' or not TELEGRAM_TOKEN:
-        logger.error("¡ERROR! Debes reemplazar 'TU_TOKEN_DE_TELEGRAM_AQUI' con tu token real en el archivo bot.py")
+    if not TELEGRAM_TOKEN:
+        logger.error("¡ERROR CRÍTICO! La variable de entorno TELEGRAM_TOKEN no está configurada.")
         return
-
-    # Crea la Application y pásale el token de tu bot.
     application = Application.builder().token(TELEGRAM_TOKEN).build()
-
-    # Registra los manejadores de comandos
     application.add_handler(CommandHandler("start", start_command))
     application.add_handler(CommandHandler("menu", menu_command))
-    application.add_handler(CommandHandler("promociones", promociones_command))
-    application.add_handler(CommandHandler("horario", horario_command))
     application.add_handler(CommandHandler("contacto", contacto_command))
-    application.add_handler(CommandHandler("info", info_command))
-    
-    # Registra el manejador para los botones inline
+    application.add_handler(CommandHandler("idioma", language_command))
     application.add_handler(CallbackQueryHandler(button_callback_handler))
-
-    # Inicia el bot.
-    logger.info("Bot iniciado. Presiona Ctrl+C para detenerlo.")
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_unknown_text))
+    logger.info("Bot multi-idioma iniciado.")
     application.run_polling()
 
 if __name__ == '__main__':

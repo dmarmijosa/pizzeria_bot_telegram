@@ -5,9 +5,16 @@
     "galeria": "Galería",
     "menu": "Menú",
     "promociones": "Promociones",
-    "contacto": "contacto",
-    "idioma": "idioma",
+    "contacto": "Contacto",
+    "idioma": "Idioma",
     "novedad": "Novedad"
+  },
+  "general": {
+    "greeting": "¡Hola",
+    "language_name": "Español",
+    "unknown_command": "Lo siento, no he entendido ese mensaje. Por favor, utiliza los comandos disponibles como /menu o los botones que te ofrezco.",
+    "welcome_line1": "Puedes ver nuestro {menu} con /menu o nuestro {contacto} con /contacto.",
+    "welcome_line2": "Para cambiar el idioma, usa /idioma."
   },
   "hero": {
     "titulo": "Disfruta de una deliciosa pizza original"
@@ -196,12 +203,10 @@
     "copa-vino": "Copa vino (de la casa)"
   },
   "menu": {
-    "nuestras": "Nuestras",
-    "pizzas": "Pizzas",
-    "especiales": "Especiales",
-    "nuestros": "Nuestros",
+    "nuestrasPizzas": "Nuestras Pizzas",
+    "pizzasEspeciales": "Pizzas Especiales",
     "tapas": "Tapas",
-    "postres": "Postres",
+    "postresCaseros": "Postres Caseros",
     "bebidas": "Bebidas",
     "vinos": "Vinos",
     "ingredientes-single": "Ingredientes extra",

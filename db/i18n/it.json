@@ -9,6 +9,21 @@
     "idioma": "Lingua",
     "novedad": "Novità"
   },
+  "general": {
+    "greeting": "Ciao",
+    "language_name": "Italiano",
+    "unknown_command": "Scusa, non ho capito il messaggio. Per favore, usa i comandi disponibili come /menu o i pulsanti che ti offro.",
+    "welcome_line1": "Puoi vedere il nostro {menu} con /menu o il nostro {contatto} con /contacto.",
+    "welcome_line2": "Per cambiare lingua, usa /idioma."
+  },
+  "menu": {
+    "nuestrasPizzas": "Le Nostre Pizze",
+    "pizzasEspeciales": "Pizze Speciali",
+    "tapas": "Tapas",
+    "postresCaseros": "Dolci Fatti in Casa",
+    "bebidas": "Bevande",
+    "vinos": "Vini"
+  },
   "hero": {
     "titulo": "Goditi una deliziosa pizza originale"
   },
@@ -194,18 +209,6 @@
     "pinot": "Pinot",
     "merlot": "Merlot",
     "copa-vino": "Bicchiere di vino (della casa)"
-  },
-  "menu": {
-    "nuestras": "Le nostre",
-    "pizzas": "Pizze",
-    "especiales": "Speciali",
-    "nuestros": "I nostri",
-    "tapas": "Tapas",
-    "postres": "Dolci",
-    "bebidas": "Bevande",
-    "vinos": "Vini",
-    "ingredientes-single": "Ingredienti extra ",
-    "ingredientes": "Ingredienti extra (Pesce/Carne/Formaggio)"
   },
   "contacto": {
     "contacto": "Contatto",
