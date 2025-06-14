@@ -1,0 +1,643 @@
+{
+  "menuPrincipal": [
+    {
+      "nombre": "nuestras-pizzas.margarita",
+      "ingredientes": ["ingredientes.tomate", "ingredientes.mozarella"],
+      "precio": "8,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.marinara",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.ajo",
+        "ingredientes.oregano"
+      ],
+      "precio": "8,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.milano",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.salami-picante"
+      ],
+      "precio": "9,20€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.napoli",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.anchoa",
+        "ingredientes.oliva-negra"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.parma",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.jamon-york"
+      ],
+      "precio": "9,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.tropical",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.jamon-york",
+        "ingredientes.maiz",
+        "ingredientes.pina"
+      ],
+      "precio": "9,80€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.genova",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.pesto",
+        "ingredientes.atun"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.hortelana",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.berenjena",
+        "ingredientes.pimiento",
+        "ingredientes.calabacin",
+        "ingredientes.champinones-frescos"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.4-quesos",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.gorgonzola",
+        "ingredientes.emmental",
+        "ingredientes.ricotta",
+        "ingredientes.queso-de-cabra"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.catania",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.atun",
+        "ingredientes.cebolla"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.venezia",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.jamon-york",
+        "ingredientes.champinones-frescos"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+
+    {
+      "nombre": "nuestras-pizzas.bari",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.pollo",
+        "ingredientes.gorgonzola"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.mare-mare",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.gambas",
+        "ingredientes.mejillones"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.mare-monti",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.gambas",
+        "ingredientes.champinones-frescos"
+      ],
+      "precio": "10.00€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.huevo",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.beicon",
+        "ingredientes.huevo"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.capricciosa",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.jamon-york",
+        "ingredientes.oliva-negra",
+        "ingredientes.alcachofa",
+        "ingredientes.huevo",
+        "ingredientes.champinones-frescos"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.toscana",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.jamon-serrano",
+        "ingredientes.rucula",
+        "ingredientes.parmesano",
+        "ingredientes.aceite-de-oliva"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.bolonesa",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.carne-con-pimiento"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.calzone-basica",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.jamon-york"
+      ],
+      "precio": "9,30€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.calzone-chapinones",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.jamon-york",
+        "ingredientes.champinones-frescos"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.calzone-huevo",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.jamon-york",
+        "ingredientes.champinones-frescos",
+        "ingredientes.huevo"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "nuestras-pizzas.pizza-familiar",
+      "precio": "18,00€",
+      "promocion": false
+    }
+  ],
+  "pizzasEspeciales": [
+    {
+      "nombre": "pizzas-especiales.carnonara",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.beicon",
+        "ingredientes.cebolla",
+        "ingredientes.huevo",
+        "ingredientes.pimienta-negra",
+        "ingredientes.parmesano"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.menorquina",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.sobrasada",
+        "ingredientes.miel"
+      ],
+      "precio": "9,60€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.focaccia",
+      "ingredientes": [
+        "ingredientes.mozarella",
+        "ingredientes.rucula",
+        "ingredientes.atun",
+        "ingredientes.berenjena",
+        "ingredientes.tomate-cherry",
+        "ingredientes.aceite-de-oliva"
+      ],
+      "precio": "11,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.palermo",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.jamon-york",
+        "ingredientes.4-quesos",
+        "ingredientes.olivas-negras"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.mamma-mia",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.beicon",
+        "ingredientes.pimienta-negra",
+        "ingredientes.champinones-frescos"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.kebab",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.carne-de-kebad"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.fresca-fresca",
+      "ingredientes": [
+        "ingredientes.mozarella",
+        "ingredientes.jamon",
+        "ingredientes.rucula",
+        "ingredientes.tomate-fresco",
+        "ingredientes.atun",
+        "ingredientes.oliva"
+      ],
+      "precio": "11,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.la-buena",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.pollo",
+        "ingredientes.champinones",
+        "ingredientes.curry"
+      ],
+      "precio": "9,80€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.la-blanca",
+      "ingredientes": [
+        "ingredientes.mozarella",
+        "ingredientes.beicon",
+        "ingredientes.huevo",
+        "ingredientes.champinones"
+      ],
+      "precio": "9,80€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.la-super",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.queso-de-cabra",
+        "ingredientes.miel",
+        "ingredientes.nueces"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.la-playa",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.gambas",
+        "ingredientes.atun"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.gustosa",
+      "ingredientes": [
+        "ingredientes.4-quesos",
+        "ingredientes.pesto",
+        "ingredientes.mozarella"
+      ],
+      "precio": "9,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.frankfurt",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.frankfurt"
+      ],
+      "precio": "9,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.barbacoa",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.beicon",
+        "ingredientes.salsa-barbacoa"
+      ],
+      "precio": "9,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.italia",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.pesto",
+        "ingredientes.cherry"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.umbria",
+      "ingredientes": [
+        "ingredientes.mozarella",
+        "ingredientes.champinones",
+        "ingredientes.trufa"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.sepia",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.sepia-en-bananas"
+      ],
+      "precio": "10,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.mency",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.queso-de-cabra",
+        "ingredientes.cebolla-caramelizada"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.golosa",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.beicon",
+        "ingredientes.gorgonzola"
+      ],
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.marlon_brando",
+      "ingredientes": [
+        "ingredientes.mozarella",
+        "ingredientes.manzana",
+        "ingredientes.cebolla-caramelizada",
+        "ingredientes.queso-de-cabra"
+      ],
+      "precio": "10,00€",
+      "promocion": true
+    },
+    {
+      "nombre": "pizzas-especiales.mediterranea",
+      "ingredientes": [
+        "ingredientes.tomate",
+        "ingredientes.mozarella",
+        "ingredientes.calabacin",
+        "ingredientes.gambas",
+        "ingredientes.ajo",
+        "ingredientes.perejil"
+      ],
+      "precio": "10,00€",
+      "promocion": true
+    }
+  ],
+  "tapas": [
+    {
+      "nombre": "tapas.patatas-bravas",
+      "precio": "4,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "tapas.lasania",
+      "precio": "8,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "tapas.anillos-de-cebolla",
+      "precio": "3,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "tapas.croqueta-de-patata",
+      "ingredientes": [
+        "ingredientes.mozarella",
+        "ingredientes.jamon-york",
+        "ingredientes.patata",
+        "ingredientes.parmesano"
+      ],
+      "precio": "1,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "tapas.croqueta-de-pollo",
+      "precio": "1,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "tapas.bomba",
+      "ingredientes": [
+        "ingredientes.patata",
+        "ingredientes.carne-bolonesa-picante"
+      ],
+      "precio": "1,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "tapas.alitas-de-pollo-picante",
+      "precio": "5,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "tapas.alitas-de-pollo-barbacoa",
+      "precio": "5,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "tapas.nuggets-de-pollo",
+      "precio": "3,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "tapas.patatas-fritas",
+      "precio": "3,50€",
+      "promocion": false
+    },
+
+    {
+      "nombre": "tapas.ensalda-caprese",
+      "precio": "8,00€",
+      "promocion": false
+    }
+  ],
+  "postres": [
+    {
+      "nombre": "postres-caseros.tiramisu",
+      "precio": "3,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "postres-caseros.bomba-frita",
+      "precio": "1,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "pizzas-especiales.pizza-nutella",
+      "precio": "7,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "postres-caseros.panacotta",
+      "precio": "3,50€",
+      "promocion": false
+    },
+    {
+      "nombre": "postres-caseros.tarta-zanahoria",
+      "precio": "3,00€",
+      "promocion": false
+    }
+  ],
+  "bebidas": [
+    {
+      "nombre": "bebidas.cerveza-italiana",
+      "precio": "3,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "bebidas.cerveza-estella",
+      "precio": "1,70€",
+      "promocion": false
+    },
+    {
+      "nombre": "bebidas.cola",
+      "precio": "1,70€",
+      "promocion": false
+    },
+    {
+      "nombre": "bebidas.cola-zero",
+      "precio": "1,70€",
+      "promocion": false
+    },
+    {
+      "nombre": "bebidas.nestea-aquarius",
+      "precio": "1,70€",
+      "promocion": false
+    },
+    {
+      "nombre": "bebidas.nestea-maracuya",
+      "precio": "2,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "bebidas.agua-sin-gas",
+      "precio": "1,20€",
+      "promocion": false
+    },
+    {
+      "nombre": "bebidas.agua-sin-gas2",
+      "precio": "2,40€",
+      "promocion": false
+    },
+    {
+      "nombre": "bebidas.agua-con-gas",
+      "precio": "1,50€",
+      "promocion": false
+    }
+  ],
+  "vino": [
+    {
+      "nombre": "vino.pinot",
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "vino.merlot",
+      "precio": "10,00€",
+      "promocion": false
+    },
+    {
+      "nombre": "vino.copa-vino",
+      "precio": "2,50€",
+      "promocion": true
+    }
+  ]
+}
