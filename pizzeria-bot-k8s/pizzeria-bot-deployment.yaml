@@ -1,0 +1,54 @@
+# Archivo: pizzeria-bot-k8s/pizzeria-bot-deployment.yaml
+# Contiene todos los recursos de Kubernetes para el bot.
+
+# 1. Namespace: Crea un espacio de trabajo aislado para el bot.
+apiVersion: v1
+kind: Namespace
+metadata:
+  # Usamos un nombre consistente en minúsculas.
+  name: bot-la-bella-italia
+
+---
+# 2. Secret: Almacena el token de Telegram de forma segura.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pizzeria-bot-secret
+  namespace: bot-la-bella-italia
+type: Opaque
+data:
+  # La clave 'telegram-token' y el valor en Base64 que proporcionaste son correctos.
+  telegram-token: "NzEzMTM4MjQxNjpBQUg3cnZ0RjNOUk1GcUQ0enFzQkJ0RTBGYndlS29JZ3Vicw=="
+
+---
+# 3. Deployment: Define cómo se debe ejecutar el contenedor del bot.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pizzeria-bot-deployment
+  namespace: bot-la-bella-italia
+spec:
+  # Correcto: solo una réplica para un bot de polling.
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pizzeria-bot
+  template:
+    metadata:
+      labels:
+        app: pizzeria-bot
+    spec:
+      containers:
+        - name: pizzeria-bot-container
+          # Apuntamos a la imagen que tienes en Docker Hub.
+          # Usamos ':latest' para obtener siempre la última versión que subas.
+          image: dmarmijosa/pizzeria-bot:latest
+          env:
+            # Inyecta la variable de entorno TELEGRAM_TOKEN en el contenedor.
+            - name: TELEGRAM_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  # El nombre del Secret que creamos arriba.
+                  name: pizzeria-bot-secret
+                  # La clave dentro del Secret que contiene el token.
+                  key: telegram-token

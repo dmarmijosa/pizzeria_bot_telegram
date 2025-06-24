@@ -1,0 +1,31 @@
+# Archivo: pizzeria-bot-application.yaml
+# Le dice a Argo CD que gestione la aplicación del bot de la pizzería.
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  # El nombre que aparecerá en el dashboard de Argo CD.
+  name: pizzeria-bot
+  # El manifiesto de la aplicación siempre va en el namespace 'argocd'.
+  namespace: argocd
+spec:
+  project: default
+  source:
+    # La URL de tu repositorio de Git.
+    repoURL: 'https://github.com/dmarmijosa/pizzeria_bot_telegram'
+    # La rama que Argo CD debe observar.
+    targetRevision: prueba1
+    # ¡Importante! Apunta a la nueva carpeta que creamos.
+    path: pizzeria-bot-k8s
+  destination:
+    # El clúster donde se va a desplegar (el clúster local).
+    server: 'https://kubernetes.default.svc'
+    # El namespace donde se crearán los recursos del bot.
+    namespace: bot-la-bella-italia
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      # Permite a Argo CD crear el namespace si no existe.
+      - CreateNamespace=true
