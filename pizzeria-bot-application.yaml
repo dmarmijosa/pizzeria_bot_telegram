@@ -14,7 +14,7 @@ spec:
     # La URL de tu repositorio de Git.
     repoURL: 'https://github.com/dmarmijosa/pizzeria_bot_telegram'
     # La rama que Argo CD debe observar.
-    targetRevision: prueba1
+    targetRevision: main
     # ¡Importante! Apunta a la nueva carpeta que creamos.
     path: pizzeria-bot-k8s
   destination:
