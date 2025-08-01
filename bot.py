@@ -117,8 +117,8 @@ async def contacto_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     
     await context.bot.send_location(
         chat_id=update.effective_chat.id,
-        latitude=40.00192,
-        longitude=3.84088
+        latitude=40.0025837,
+        longitude=3.8413879
     )
 
 async def language_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
